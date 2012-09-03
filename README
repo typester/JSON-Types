@@ -1,5 +1,5 @@
 NAME
-    JSON::Types -
+    JSON::Types - variable type utility for JSON encoding
 
 SYNOPSIS
         # Export type functions by default
