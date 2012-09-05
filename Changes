@@ -1,5 +1,8 @@
 Revision history for Perl extension JSON::Types
 
+0.04 2012-09-05T15:41:58+09:00
+     - avoid to use 'return;' it might cause unexpected list shrinking. (gfx++)
+
 0.03 2012-09-05T11:52:27+09:00
      - cange bool(undef) behaviour, bool(undef) returns false instead of undef
 
