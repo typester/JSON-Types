@@ -7,14 +7,17 @@ our $VERSION = '0.01';
 our @EXPORT  = qw/number string bool/;
 
 sub number($) {
+    return unless defined $_[0];
     $_[0] + 0;
 }
 
 sub string($) {
+    return unless defined $_[0];
     $_[0] . '';
 }
 
 sub bool($) {
+    return unless defined $_[0];
     $_[0] ? \1 : \0;
 }
 
@@ -105,6 +108,20 @@ You should specify full function name when this case, like C<JSON::Types::number
 =head2 number
 
 =head2 bool
+
+=head1 BEHAVIOURS ON UNEXPECTED ARGS
+
+=head2 string(undef), number(undef), bool(undef) returns undef
+
+Passing undefined variable to these functions is returns undef. If you doesn't prefer this, have to treat this like following:
+
+    number $undef_possible_value // 0
+
+This code returns 0 if variable is undef.
+
+=head2 number($string)
+
+Passing not numeric variable to number function is returns 0, but a warning will be occurred.
 
 =head1 AUTHOR
 
