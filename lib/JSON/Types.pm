@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use parent 'Exporter';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 our @EXPORT  = qw/number string bool/;
 
 sub number($) {

@@ -76,6 +76,19 @@ FUNCTIONS
   string
   number
   bool
+BEHAVIOURS ON UNEXPECTED ARGS
+  string(undef), number(undef), bool(undef) returns undef
+    Passing undefined variable to these functions is returns undef. If you
+    doesn't prefer this, have to treat this like following:
+
+        number $undef_possible_value // 0
+
+    This code returns 0 if variable is undef.
+
+  number($string)
+    Passing not numeric variable to number function is returns 0, but a
+    warning will be occurred.
+
 AUTHOR
     Daisuke Murase <typester@cpan.org>
 

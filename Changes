@@ -1,4 +1,7 @@
 Revision history for Perl extension JSON::Types
 
+0.02 2012-09-05T11:37:58+09:00
+     - define behaviours to unexpected arguments
+
 0.01 2012-09-03T20:16:04+09:00
      - initial version
