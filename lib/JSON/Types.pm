@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use parent 'Exporter';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 our @EXPORT  = qw/number string bool/;
 
 sub number($) {
@@ -17,7 +17,6 @@ sub string($) {
 }
 
 sub bool($) {
-    return unless defined $_[0];
     $_[0] ? \1 : \0;
 }
 
@@ -111,9 +110,9 @@ You should specify full function name when this case, like C<JSON::Types::number
 
 =head1 BEHAVIOURS ON UNEXPECTED ARGS
 
-=head2 string(undef), number(undef), bool(undef) returns undef
+=head2 string(undef), number(undef) returns undef, bool(undef) returns false.
 
-Passing undefined variable to these functions is returns undef. If you doesn't prefer this, have to treat this like following:
+Passing undefined variable to string and number function is returns undef. If you doesn't prefer this, have to treat this like following:
 
     number $undef_possible_value // 0
 

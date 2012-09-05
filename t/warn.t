@@ -6,7 +6,9 @@ use JSON::Types;
 
 is number undef, undef, 'number undef returns undef ok';
 is string undef, undef, 'string undef returns undef ok';
-is bool undef, undef, 'bool undef returns undef ok';
+
+my $b = bool undef;
+ok ref($b) eq 'SCALAR' && $$b == 0, 'bool undef returns false ok';
 
 {
     open my $stderr, '>', \my $out;
