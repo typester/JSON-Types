@@ -1,5 +1,8 @@
 Revision history for Perl extension JSON::Types
 
+0.05 2012-10-17T13:35:40+09:00
+     - workaround perl SEGV (perlbug #115206) on Makefile.PL
+
 0.04 2012-09-05T15:41:58+09:00
      - avoid to use 'return;' it might cause unexpected list shrinking. (gfx++)
 
