@@ -94,13 +94,13 @@ You can fix above code by using this module like this:
 
 =head1 FUNCTIONS
 
-There is three functions and all functions is exported by default.
+There are three functions and all functions are exported by default.
 
-If you don't want this exported functions, pass empty list to use line:
+If you don't want any exported functions, pass an empty list to the use line:
 
     use JSON::Types ();
 
-You should specify full function name when this case, like C<JSON::Types::number $foo> or etc.
+You should specify full function name in that case, like C<JSON::Types::number $foo> etc.
 
 =head2 string
 
@@ -112,7 +112,8 @@ You should specify full function name when this case, like C<JSON::Types::number
 
 =head2 string(undef), number(undef) returns undef, bool(undef) returns false.
 
-Passing undefined variable to string and number function is returns undef. If you doesn't prefer this, have to treat this like following:
+Passing an undefined variable to string and number function returns undef.
+If you don't prefer this, you have to treat it like the following example:
 
     number $undef_possible_value // 0
 
@@ -120,7 +121,22 @@ This code returns 0 if variable is undef.
 
 =head2 number($string)
 
-Passing not numeric variable to number function is returns 0, but a warning will be occurred.
+Passing a non-numeric variable to number function returns 0, but a warning will be issued.
+
+=head1 BOOLEAN BEHAVIOUR
+
+    my $var = bool 0
+    if ($var) {
+        # this is run, because $var is true in a perl perspective
+    }
+
+Boolean values converted by C<bool> are actually scalar references, and are therefore always
+evaluated to true in perl. So, be careful when you use C<bool $var> and then do further
+processing in perl before converting it to JSON. If you need a representation that is correct in perl,
+but also results in a boolean value in JSON, an alternative could be
+
+    use JSON;
+    $var = $var ? JSON::true : JSON::false
 
 =head1 AUTHOR
 
