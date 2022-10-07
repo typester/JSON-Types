@@ -27,4 +27,27 @@ ok ref($b) eq 'SCALAR' && $$b == 0, 'bool undef returns false ok';
     close $stderr;
 }
 
+for my $inf (qw(inf +inf -inf Inf +Inf -Inf infxxx)) {
+    open my $stderr, '>', \my $out;
+    local *STDERR = $stderr;
+
+    my $n;
+    is eval { $n = number $inf; 1; }, undef, 'infinite num is not allowed ok';
+    like $@, qr{^"\Q$inf\E" is disallowed in JSON}, 'croak ok';
+    is $n, undef, 'return undef ok';
+
+    if ($inf eq 'infxxx') {
+        like $out, qr{^Argument "\Q$inf\E" isn't numeric in addition \(\+\)}, 'warnings ok';
+    }
+
+    close $stderr;
+}
+
+for my $nan (sin('inf')) {
+    my $n;
+    is eval { $n = number $nan; 1; }, undef, 'NaN is not allowed ok';
+    like $@, qr{^"\Q$nan\E" is disallowed in JSON}, 'croak ok';
+    is $n, undef, 'return undef ok';
+}
+
 done_testing;

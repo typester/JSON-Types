@@ -2,12 +2,22 @@ package JSON::Types;
 use strict;
 use warnings;
 use parent 'Exporter';
+use Carp;
 
 our $VERSION = '0.05';
 our @EXPORT  = qw/number string bool/;
 
 sub number($) {
     return undef unless defined $_[0];
+
+    if (9 ** 9 ** 9 == $_[0] + 0 || -9 ** 9 ** 9 == $_[0] + 0) {
+        croak sprintf '"%s" is disallowed in JSON', $_[0];
+    }
+
+    if (!defined($_[0] + 0 <=> 9 ** 9 ** 9)) {
+        croak sprintf '"%s" is disallowed in JSON', $_[0];
+    }
+
     $_[0] + 0;
 }
 
